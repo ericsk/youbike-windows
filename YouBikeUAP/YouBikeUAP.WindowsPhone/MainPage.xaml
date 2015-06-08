@@ -1,14 +1,46 @@
-﻿<Page
-    x:Class="YouBikeUAP.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:YouBikeUAP"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+﻿<Page x:Class="YouBikeUAP.MainPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:YouBikeUAP"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d"
+  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
-    </Grid>
+  <!-- 樣式範本 -->
+  <Page.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="HubSectionHeaderTemplate">
+        <TextBlock Margin="0,0,0,-9.5" Text="{Binding}"/>
+      </DataTemplate>
+    </ResourceDictionary>
+  </Page.Resources>
+  
+  <Grid x:Name="LayoutRoot">
+    <Hub x:Name="Hub" x:Uid="Hub" Header="我愛微笑單車">
+      <HubSection x:Uid="NearStationSection" Header="鄰近租賃站"
+                  DataContext="{Binding Stations}"
+                  HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+        <DataTemplate>
+          <ListView ItemsSource="{Binding}"
+                    IsItemClickEnabled="True"
+                    ItemClick="OnNearStationItemClick"
+                    ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <StackPanel Margin="0,0,0,27.5">
+                  <TextBlock Text="{Binding sna}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="距離 " Margin="0,0,0,0" />
+                    <TextBlock Text="{Binding DistanceString}" Margin="5,0,5,0" />
+                    <TextBlock Text="公尺" />
+                  </StackPanel>
+                </StackPanel>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </DataTemplate>
+      </HubSection>
+    </Hub>
+  </Grid>
 </Page>
