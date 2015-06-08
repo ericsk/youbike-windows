@@ -9,10 +9,13 @@
   using Windows.UI.Xaml.Navigation;
   using Windows.Devices.Geolocation;
   using Windows.UI.Xaml;
+  using Common;
   using Data;
 
   public sealed partial class MainPage : Page
   {
+    private readonly NavigationHelper navigationHelper;
+
     public ObservableCollection<YouBikeDataStation> Stations { get; private set; }
 
     private StatusBar statusBar;
@@ -32,16 +35,24 @@
 
       this.NavigationCacheMode = NavigationCacheMode.Required;
 
+      this.navigationHelper = new NavigationHelper(this);
+      this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+      this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
       // get the statusbar 
       statusBar = StatusBar.GetForCurrentView();
       progressIndicator = statusBar.ProgressIndicator;
-
-      // 頁面載入後的事件
-      Loaded += MainPage_Loaded;
     }
 
-    private async void MainPage_Loaded(object sender, RoutedEventArgs args)
+    public NavigationHelper NavigationHelper
     {
+      get { return this.navigationHelper; }
+    }
+
+    private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs args)
+    {
+      Debug.WriteLine("LoadState!");
+
       // show the progress indicator
       await statusBar.ShowAsync();
       await progressIndicator.ShowAsync();
@@ -77,10 +88,10 @@
       await statusBar.HideAsync();
     }
 
-    protected override void OnNavigatedTo(NavigationEventArgs e)
+    private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
     {
-      base.OnNavigatedTo(e);
     }
+    
 
     private void OnNearStationItemClick(object sender, ItemClickEventArgs e)
     {
@@ -89,5 +100,19 @@
         throw new Exception("切換頁面發生錯誤");
       }
     }
+
+    #region NavigationHelper Registration
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+      this.navigationHelper.OnNavigatedTo(e);
+    }
+
+    protected override void OnNavigatedFrom(NavigationEventArgs e)
+    {
+      this.navigationHelper.OnNavigatedFrom(e);
+    }
+
+    #endregion
   }
 }

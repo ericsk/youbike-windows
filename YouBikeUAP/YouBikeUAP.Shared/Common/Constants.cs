@@ -10,5 +10,9 @@
 
     // 預設讀取鄰近租賃站數量
     public const int NEAR_STATION_COUNT = 32;
+
+    // 各種金鑰
+    // Bing Maps Key
+    public const string BING_MAPS_KEY = "YOUR_BING_MAPS_KEY";
   }
 }

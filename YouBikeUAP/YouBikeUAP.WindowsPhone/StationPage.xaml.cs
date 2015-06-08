@@ -1,42 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Devices.Geolocation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using YouBikeUAP.Data;
-
-// 空白頁項目範本已記錄在 http://go.microsoft.com/fwlink/?LinkID=390556
-
-namespace YouBikeUAP
+﻿namespace YouBikeUAP
 {
-  /// <summary>
-  /// 可以在本身使用或巡覽至框架內的空白頁面。
-  /// </summary>
+  using Windows.Devices.Geolocation;
+  using Windows.UI.Xaml.Controls;
+  using Windows.UI.Xaml.Navigation;
+  using YouBikeUAP.Common;
+  using YouBikeUAP.Data;
+
   public sealed partial class StationPage : Page
   {
+    private readonly NavigationHelper navigationHelper;
+
+    public string BingMapsKey { get; private set; }
+
     public StationPage()
     {
       this.InitializeComponent();
+
+      DataContext = this;
+      BingMapsKey = Constants.BING_MAPS_KEY;
+
+      this.navigationHelper = new NavigationHelper(this);
+      this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+      this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
     }
 
-    /// <summary>
-    /// 在此頁面即將顯示在框架中時叫用。
-    /// </summary>
-    /// <param name="e">描述如何到達此頁面的事件資料。
-    /// 這個參數通常用來設定頁面。</param>
-    protected override void OnNavigatedTo(NavigationEventArgs e)
+    private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
     {
-      var station = (YouBikeDataStation)e.Parameter;
+      var station = (YouBikeDataStation)e.NavigationParameter;
       // update page info
       StationName.Text = station.sna;
       BikeStopAvailable.Text = station.sbi;
@@ -48,8 +38,24 @@ namespace YouBikeUAP
 
       myMapControl.Center = new Geopoint(geopos);
       myMapControl.ZoomLevel = 15;
-
-      base.OnNavigatedTo(e);
     }
+
+    private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+    {
+    }
+
+    #region NavigationHelper Registration
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+      this.navigationHelper.OnNavigatedTo(e);
+    }
+
+    protected override void OnNavigatedFrom(NavigationEventArgs e)
+    {
+      this.navigationHelper.OnNavigatedFrom(e);
+    }
+
+    #endregion
   }
 }

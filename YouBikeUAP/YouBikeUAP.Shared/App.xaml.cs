@@ -46,7 +46,7 @@
     /// 搜尋結果等。
     /// </summary>
     /// <param name="e">關於啟動要求和處理序的詳細資料。</param>
-    protected override void OnLaunched(LaunchActivatedEventArgs e)
+    protected async override void OnLaunched(LaunchActivatedEventArgs e)
     {
 #if DEBUG
       if (System.Diagnostics.Debugger.IsAttached)
@@ -64,12 +64,23 @@
         // 建立框架做為巡覽內容，並巡覽至第一頁
         rootFrame = new Frame();
 
+        SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+
         // TODO: 將這個值變更成適合您應用程式的快取大小
         rootFrame.CacheSize = 1;
 
         if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
         {
-          // TODO: 從之前暫停的應用程式載入狀態
+          // 只在適當時還原儲存的工作階段狀態
+          try
+          {
+            await SuspensionManager.RestoreAsync();
+          }
+          catch (SuspensionManagerException)
+          {
+            // 發生狀況，還原狀態。
+            // 假定沒有狀態，並繼續
+          }
         }
 
         // 將框架放在目前視窗中
@@ -127,9 +138,11 @@
     /// </summary>
     /// <param name="sender">暫停之要求的來源。</param>
     /// <param name="e">有關暫停之要求的詳細資料。</param>
-    private void OnSuspending(object sender, SuspendingEventArgs e)
+    private async void OnSuspending(object sender, SuspendingEventArgs e)
     {
       var deferral = e.SuspendingOperation.GetDeferral();
+
+      await SuspensionManager.SaveAsync();
 
       // TODO: 儲存應用程式狀態，並停止任何背景活動
       deferral.Complete();
