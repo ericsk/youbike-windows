@@ -33,7 +33,7 @@
         <Maps:MapControl MapServiceToken="{Binding BingMapsKey}"
                          Height="350"
                          Language="zh-TW"
-                         x:Name="myMapControl" />
+                         x:Name="stationMapControl" />
 
         <Grid Margin="12,10">
           <Grid.ColumnDefinitions>
@@ -80,4 +80,11 @@
       </StackPanel>
     </ScrollViewer>
   </Grid>
+  
+  <Page.BottomAppBar>
+    <CommandBar>
+      <AppBarButton Label="看看怎麼走" Icon="Directions" Click="OnDirectionsCommandClick" />
+    </CommandBar>
+  </Page.BottomAppBar>
+
 </Page>

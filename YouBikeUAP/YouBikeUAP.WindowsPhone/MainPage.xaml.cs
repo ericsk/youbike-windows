@@ -11,6 +11,7 @@
   using Windows.UI.Xaml;
   using Common;
   using Data;
+  using System.Threading.Tasks;
 
   public sealed partial class MainPage : Page
   {
@@ -49,10 +50,13 @@
       get { return this.navigationHelper; }
     }
 
-    private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs args)
+    private void NavigationHelper_LoadState(object sender, LoadStateEventArgs args)
     {
-      Debug.WriteLine("LoadState!");
+      LoadNearStopData();
+    }
 
+    private async void LoadNearStopData()
+    {
       // show the progress indicator
       await statusBar.ShowAsync();
       await progressIndicator.ShowAsync();
@@ -78,6 +82,7 @@
       {
         var pos = geopos.Coordinate.Point.Position;
         var stations = await YouBikeDataSource.GetStationsByLocationAsync(pos.Latitude, pos.Longitude);
+        Stations.Clear();
         foreach (var station in stations)
         {
           Stations.Add(station);
@@ -87,6 +92,12 @@
       await progressIndicator.HideAsync();
       await statusBar.HideAsync();
     }
+
+    private void OnRefreshCommandClick(object sender, RoutedEventArgs e)
+    {
+      LoadNearStopData();
+    }
+
 
     private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
     {
@@ -114,5 +125,6 @@
     }
 
     #endregion
+
   }
 }

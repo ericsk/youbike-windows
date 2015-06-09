@@ -44,4 +44,11 @@
       </HubSection>
     </Hub>
   </Grid>
+  
+  <Page.BottomAppBar>
+    <CommandBar ClosedDisplayMode="Minimal">
+      <AppBarButton Label="更新資料" Icon="Refresh" Click="OnRefreshCommandClick" />
+    </CommandBar>
+  </Page.BottomAppBar>
+  
 </Page>
