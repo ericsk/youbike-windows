@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouBikeUAP.Windows", "YouBi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouBikeUAP.WindowsPhone", "YouBikeUAP\YouBikeUAP.WindowsPhone\YouBikeUAP.WindowsPhone.csproj", "{DE373930-6A98-4F75-A0B7-34810F42EF8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouBikeWP8", "YouBikeWP8\YouBikeWP8.csproj", "{F15B17EF-18A2-4D7C-8615-E25619028429}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		YouBikeUAP\YouBikeUAP.Shared\YouBikeUAP.Shared.projitems*{de373930-6a98-4f75-a0b7-34810f42ef8b}*SharedItemsImports = 4
@@ -76,6 +78,30 @@ Global
 		{DE373930-6A98-4F75-A0B7-34810F42EF8B}.Release|x86.ActiveCfg = Release|x86
 		{DE373930-6A98-4F75-A0B7-34810F42EF8B}.Release|x86.Build.0 = Release|x86
 		{DE373930-6A98-4F75-A0B7-34810F42EF8B}.Release|x86.Deploy.0 = Release|x86
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|ARM.Build.0 = Debug|ARM
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|ARM.Deploy.0 = Debug|ARM
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|x64.Build.0 = Debug|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|x86.ActiveCfg = Debug|x86
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|x86.Build.0 = Debug|x86
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Debug|x86.Deploy.0 = Debug|x86
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|ARM.ActiveCfg = Release|ARM
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|ARM.Build.0 = Release|ARM
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|ARM.Deploy.0 = Release|ARM
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|x64.ActiveCfg = Release|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|x64.Build.0 = Release|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|x64.Deploy.0 = Release|Any CPU
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|x86.ActiveCfg = Release|x86
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|x86.Build.0 = Release|x86
+		{F15B17EF-18A2-4D7C-8615-E25619028429}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
