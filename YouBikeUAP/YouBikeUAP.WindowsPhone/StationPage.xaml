@@ -23,7 +23,7 @@
 
     <!-- 標題面板 -->
     <StackPanel Grid.Row="0" Background="#FF202C3A">
-      <TextBlock Text="我愛微軟單車" Style="{ThemeResource TitleTextBlockStyle}" Margin="12,12,0,0"/>
+      <TextBlock Text="我愛微軟單車" Style="{ThemeResource TitleTextBlockStyle}" Margin="12,12,0,9"/>
       <TextBlock x:Name="StationName" Text="捷運市政府站" Margin="12,-6.5,0,26.5" Style="{ThemeResource SubheaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
     </StackPanel>
 
@@ -77,6 +77,10 @@
                      Margin="10,0"
                      Style="{StaticResource SubheaderTextBlockStyle}" />
         </Grid>
+        <TextBlock Text="租賃站地址" Margin="9,0"
+                   Style="{StaticResource BodyTextBlockStyle}"/>
+        <TextBlock x:Name="Address" Margin="9,10"
+                   Style="{StaticResource ListViewItemContentTextBlockStyle}"/>
       </StackPanel>
     </ScrollViewer>
   </Grid>
