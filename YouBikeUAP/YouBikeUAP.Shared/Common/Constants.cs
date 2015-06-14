@@ -13,6 +13,7 @@
 
     // 各種金鑰
     // Bing Maps Key
-    public const string BING_MAPS_KEY = "YOUR_BING_MAPS_KEY";
+    public const string BING_MAPS_KEY = "YOUR_WP81_BING_MAPS_KEY";
+    public const string WIN81_BING_MAPS_KEY = "YOUR_WIN81_BING_MAPS_KEY";
   }
 }
