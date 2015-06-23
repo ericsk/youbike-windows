@@ -7,14 +7,18 @@
   using Windows.UI.Xaml.Controls;
   using Windows.UI.Xaml.Navigation;
   using Windows.Devices.Geolocation;
+  using Microsoft.ApplicationInsights;
   using Common;
   using Data;
+  using Microsoft.ApplicationInsights.DataContracts;
+  using System.Collections.Generic;
 
   public sealed partial class MainPage : Page
   {
     private NavigationHelper navigationHelper;
     public ObservableCollection<YouBikeDataStation> Stations { get; private set; }
 
+    private TelemetryClient telemetryClient;
 
     /// <summary>
     /// 取得 NavigationHelper，以用來協助巡覽及處理序生命週期管理。
@@ -26,6 +30,8 @@
 
     public MainPage()
     {
+      telemetryClient = new TelemetryClient();
+
       this.InitializeComponent();
 
       DataContext = this;
@@ -60,6 +66,7 @@
       catch (Exception e)
       {
         Debug.WriteLine("[HubPage$LoadState] " + e.Message);
+        telemetryClient.TrackException(e);
       }
 
       if (geopos != null)
@@ -71,6 +78,15 @@
         {
           Stations.Add(station);
         }
+
+        var dict = new Dictionary<string, string>();
+        dict.Add("Latitude", pos.Latitude.ToString());
+        dict.Add("Longitude", pos.Longitude.ToString());
+        telemetryClient.TrackEvent("UserLocation", dict);
+      }
+      else
+      {
+        telemetryClient.TrackEvent("Unknown Location");
       }
 
       progressRing.IsActive = false;
@@ -102,9 +118,16 @@
 
     private void OnStationItemClick(object sender, ItemClickEventArgs args)
     {
+      var station = (YouBikeDataStation)args.ClickedItem;
+      var dict = new Dictionary<string, string>();
+      dict.Add("SiteName", station.sna);
+      telemetryClient.TrackEvent("StationClick", dict);
+
       if (!Frame.Navigate(typeof(StationPage), args.ClickedItem))
       {
-        throw new Exception("切換頁面發生錯誤");
+        var e = new Exception("切換頁面發生錯誤");
+        telemetryClient.TrackException(e);
+        throw e;
       }
     }
   }

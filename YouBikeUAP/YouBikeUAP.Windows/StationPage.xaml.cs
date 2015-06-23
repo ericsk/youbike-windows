@@ -6,6 +6,10 @@
   using Data;
   using System.Diagnostics;
   using Bing.Maps;
+  using Microsoft.ApplicationInsights;
+  using Windows.UI.Xaml;
+
+
 
   /// <summary>
   /// 可以在本身使用或巡覽至框架內的空白頁面。
@@ -16,9 +20,15 @@
     public double Longitude { get; private set; }
     public double Latitude { get; private set; }
 
+    public int Availability { get; private set; }
+
+    public int Capacity { get; private set; }
+
     public string Title { get; set; }
 
     public YouBikeDataStation Station { get; private set; }
+
+    private TelemetryClient telemetryClient;
 
     private readonly NavigationHelper navigationHelper;
 
@@ -35,6 +45,8 @@
       DataContext = this;
       MapsToken = Constants.WIN81_BING_MAPS_KEY;
 
+      telemetryClient = new TelemetryClient();
+
       this.InitializeComponent();
 
 
@@ -50,6 +62,8 @@
       stationMap.Center = new Location(Station.lat, Station.lng);
 
       Title = Station.sna;
+      Availability =  int.Parse(Station.sbi);
+      Capacity = int.Parse(Station.bemp);
 
       Pushpin stationPin = new Pushpin();
       stationPin.Text = Station.sna;

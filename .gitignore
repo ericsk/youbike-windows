@@ -189,3 +189,5 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 /YouBikeUAP/YouBikeUAP.WindowsPhone/Package.StoreAssociation.xml
+/YouBikeUAP/YouBikeUAP.Windows/Package.StoreAssociation.xml
+/YouBikeUAP/YouBikeUAP.Windows/BundleArtifacts

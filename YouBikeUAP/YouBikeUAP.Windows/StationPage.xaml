@@ -17,7 +17,7 @@
 
     <Grid.RowDefinitions>
       <RowDefinition Height="140"/>
-      <RowDefinition Height="500" />
+      <RowDefinition Height="600" />
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
@@ -45,17 +45,19 @@
       </bm:Map.Center>
     </bm:Map>
 
-    <Hub Grid.Row="2"> 
-      <HubSection Header="">
-        <DataTemplate>
-          <Grid>
-            
-          </Grid>
-          </DataTemplate>
-      </HubSection>
-      <HubSection Header="資訊">
-        
-      </HubSection>
-    </Hub>
+    <Grid Grid.Row="2" Margin="39,20,39,0"> 
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="150" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="32" />
+        <ColumnDefinition Width="150" />
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+
+      <TextBlock Grid.Column="0" Text="可借車輛" Style="{StaticResource SubheaderTextBlockStyle}" />
+      <TextBlock Grid.Column="1" Text="{Binding Availability}" Style="{StaticResource SubheaderTextBlockStyle}" />
+      <TextBlock Grid.Column="3" Text="目前空位" Style="{StaticResource SubheaderTextBlockStyle}" />
+      <TextBlock Grid.Column="4" Text="{Binding Capacity}" Style="{StaticResource SubheaderTextBlockStyle}" />
+    </Grid>
   </Grid>
 </Page>
